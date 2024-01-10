@@ -84,8 +84,9 @@ Main:
 
     Cancel the action goal when the loop ends or the target is reached
 
-End the progra
+End the program
 ```
+![setTargetNode](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/8eac8264-e023-4582-9e70-fcd4095e04f8)
 
 ### lastTargetService node ###
 This is a service node that, when called, returnsthe coordinates of the last target sent by the user.
