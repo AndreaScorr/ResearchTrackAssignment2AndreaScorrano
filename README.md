@@ -87,4 +87,74 @@ Main:
 End the progra
 ```
 
+### lastTargetService node ###
+This is a service node that, when called, returnsthe coordinates of the last target sent by the user.
+```
+Function lastTarget(req, res):
+    # Get the desired positions from topics and put them in the result argument of the service
+    
+    res.target_pose.pose.position.x = get("/des_pos_x")
+    res.target_pose.pose.position.y = get("/des_pos_y")
+
+    Print "return x:", res.target_pose.pose.position.x, "y:", res.target_pose.pose.position.y
+    Return true
+
+Main:
+    Initialize ROS node ("lastTarget_")
+    Create a NodeHandle
+    Initialize a ServiceServer with the lastTarget function as the callback for the "/lastTarget" service
+    Enter the ROS spin loop
+
+    # The program will stay in the spin loop, waiting for service requests
+
+    Return 0
+```
+
+### positionAndVelocitySubscriber node ###
+This service node subscribes to the robot’s position and velocity (using the custom message) and implements a server to retrieve the distance of the robot from the target and the robot’s average speed.
+
+```
+Initialize pos_x, pos_y, vel_x, vel_z as global variables
+Initialize lastTarget as an instance of assignment_2_2023::LastTarget
+Initialize lastPosition_x, lastPosition_y as variables for the last target position
+Initialize windowSize, sumVel_x, sumVel_z, i, average_vel_x, average_vel_z as variables for averaging
+Initialize dist_x, dist_y as variables for the distance calculation
+
+Function parameterCallback(msg):
+    Assign values from the message to pos_x, pos_y, vel_x, vel_z
+    Calculate dist_x and dist_y based on the difference between pos_x, pos_y, and lastPosition_x, lastPosition_y
+
+Function VelocityAndDistance(req, res):
+    Set res.dist_x, res.dist_y to dist_x, dist_y
+    Set res.average_x, res.average_z to average_vel_x, average_vel_z
+    Print distance from target x, distance from target y, average velocity x, average velocity z
+    Return true
+
+Main:
+    Initialize ROS node ("listener")
+    Create a NodeHandle
+    Create a ServiceClient for "/lastTarget"
+    Create a ServiceServer for "/VelocityDistance" with VelocityAndDistance as the callback
+
+    Wait for the service client to exist
+    Call the lastTarget service and store the results in lastPosition_x, lastPosition_y
+    Get the windowSize from the parameter server
+
+    Create a subscriber for the "robot/parameters" topic with parameterCallback as the callback
+
+    Loop while ROS is active:
+        Accumulate velocities in sumVel_x, sumVel_z
+        Increment i
+
+        If i equals windowSize:
+            Calculate average velocities and reset accumulators
+            Set i to 0
+
+        Run the ROS spin loop to handle callbacks
+
+    Return 0
+
+```
+
+
 
