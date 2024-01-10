@@ -157,5 +157,6 @@ Main:
 
 ```
 
+![Node3 drawio](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/6126baac-d393-4de9-b2f1-33e7e1fb104e)
 
 
