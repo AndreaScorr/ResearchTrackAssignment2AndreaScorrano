@@ -41,7 +41,7 @@ The last line must be runned every time it's needed to know the distance of the 
 In this assignment were implemented three nodes. The following flow charts show how each node works.
 
 ### setTarget Node ###
-This node that implements an action client, allow the user to set a target (x, y) or to cancel it. Has been used the feedback/status of the action server to know when the target has been reached. The node also publishes the robot position and velocity as a custom message (x,y, vel_x, vel_z), by relying on the values published on the topic /odom;
+This node that implements an action client, allow the user to set a target (x, y) or to cancel it. Has been used the feedback/status of the action server to know when the target has been reached. The node also publishes the robot position and velocity as a custom message (x,y, vel_x, vel_z), by relying on the values published on the topic /odom.
 ```
 Initialize pos_x, pos_y, vel_x, vel_z as global variables
 Initialize feedback as a string
