@@ -161,4 +161,37 @@ Main:
 
 ![Node3 drawio](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/6126baac-d393-4de9-b2f1-33e7e1fb104e)
 
+## Simulation of the assignment ##
+To setup the environment is needed to launch assignment1.launch
+
+![Screenshot 2024-01-11 112910](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/d99a8ada-260e-4734-a1fa-fd1348bf01cd)
+
+----
+
+Once done, will be opened Gazebo and Rviz, with the environment.
+
+![Screenshot 2024-01-11 113109](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/73e0f8a0-6cd6-4909-93cf-77f111e9b771)
+
+----
+
+To run the three nodes using the launch file, it's needed to write le following line, specifying the window size of the average, in this case 3:
+
+```
+# roslaunch assignment_2_2023 AndreaScorrano.launch des_window:=3
+ 
+```
+![Screenshot 2024-01-11 113349](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/20665620-b7f7-46ea-a6be-4fee966c9318)
+
+Once started the node, will be asked to the user the position x and y of the goal. Will be shown a message that specify to the user to press ctr-c to cancel the goal (has been used ros::Duration(3.0).sleep() to give the user the possibility to see the message)
+
+In case ctrl-c is pressed the goal is cancelled and on the terminal where assignment1.launch is launched will be shown the following result:
+
+![Screenshot 2024-01-11 113428](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/108ce4fd-28cc-493e-8c79-536735b07718)
+
+
+
+---
+
+
+
 
