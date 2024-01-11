@@ -212,6 +212,14 @@ On Gazebo is possible to see that the robot reached the goal, in this case the d
 
 ![goalS](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/8cc4d6bc-e2f0-4c86-925f-1fde1c271979)
 
+---
+In order to have a view of what happens bebehind the scenes is needed to run the following command on the terminal:
+```
+# rosrun rqt_graph rqt_graph
+```
+It's possible to see isualize the communication between the nodes.
+
+![rosgraph](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/d51586b3-86fe-4835-a208-0c880dea26fa)
 
 
 
