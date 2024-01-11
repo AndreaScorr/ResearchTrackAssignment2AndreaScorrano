@@ -14,18 +14,20 @@ topic /odom;
 implements a server to retrieve the distance of the robot from the target and the robot’s average speed.
 
 ## How to Run the code
-In order to start the whole simulation, open three terminal.
+In order to start the whole simulation, open three terminals.
 To run the simulation of the enviroment, it's needed to write le following line:
 
 ```bash
 # roslaunch assignment_2_2023 assignment1.launch
 
 ```
-To run the three nodes, it's needed to write le following line, to run the launch file:
+To run the three nodes using the launch file, it's needed to write le following line, specifying the window size of the average, in this case 3:
 
 ```
-# roslaunch assignment_2_2023 AndreaScorrano.launch 
+# roslaunch assignment_2_2023 AndreaScorrano.launch des_window:=3
+ 
 ```
+
 To retrieve the distance of the robot from the target and the robot’s average speed, it's needed to call the service with the following line:
 
 ```
@@ -34,7 +36,7 @@ To retrieve the distance of the robot from the target and the robot’s average 
 
 The last line must be runned every time it's needed to know the distance of the robot from the target and the robot’s average speed. 
 
-## Pseudocode Flow Charts ##
+## Pseudocode and Flow Charts ##
 
 In this assignment were implemented three nodes. The following flow charts show how each node works.
 
@@ -89,7 +91,7 @@ End the program
 ![setTargetNode](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/8eac8264-e023-4582-9e70-fcd4095e04f8)
 
 ### lastTargetService node ###
-This is a service node that, when called, returnsthe coordinates of the last target sent by the user.
+This is a service node that, when called, returns the coordinates of the last target sent by the user.
 ```
 Function lastTarget(req, res):
     # Get the desired positions from topics and put them in the result argument of the service
