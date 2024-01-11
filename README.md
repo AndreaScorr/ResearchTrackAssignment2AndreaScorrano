@@ -188,9 +188,29 @@ In case ctrl-c is pressed the goal is cancelled and on the terminal where assign
 
 ![Screenshot 2024-01-11 113428](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/108ce4fd-28cc-493e-8c79-536735b07718)
 
+---
 
+To retrieve the distance of the robot from the target and the robot’s average speed while the robot is reaching the goal, it's needed to call the service with the following line:
+
+```
+# rosservice call /VelocityDistance 
+```
+
+![rosservice](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/09928a1f-704b-4fd6-a23a-8d10e9bd306b)
 
 ---
+
+Once the robot reached the goal position, in the therminal where assignment2.launch were launched it's possible to see the message "Goal succeded!":
+
+![goalS3](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/b1659d2b-d170-4837-b28b-ac77f2170c1b)
+
+In the terminal where AndreaScorrano.launch where launched it's possible to see the following result:
+
+![goalS2](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/e6ac3519-d4a9-43b7-afe2-9feda9d43ecf)
+
+On Gazebo is possible to see that the robot reached the goal, in this case the desired position where x=5 and y=6:
+
+![goalS](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/8cc4d6bc-e2f0-4c86-925f-1fde1c271979)
 
 
 
