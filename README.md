@@ -228,6 +228,6 @@ If it's desidered to run the whole simulation without open two terminals is suff
 ```
 # roslaunch assignment_2_2023 AndreaScorranoFasterLaunch.launch des_window:=3
 ```
-It will be opened Gazebo, Rviz, and all nodes developed.
+It will be opened Gazebo, Rviz, and all nodes developed. However it's suggested to use two different temnials in order to have a bettwe view of what's appening. 
 
 
