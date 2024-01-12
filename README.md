@@ -184,7 +184,7 @@ To run the three nodes using the launch file, it's needed to write le following 
 
 Once started the node, will be asked to the user the position x and y of the goal. Will be shown a message that specify to the user to press ctr-c to cancel the goal (has been used ros::Duration(3.0).sleep() to give the user the possibility to see the message)
 
-In case ctrl-c is pressed the goal is cancelled and on the terminal where assignment1.launch is launched will be shown the following result:
+In case ctrl-c is pressed the goal is cancelled and on the terminal where assignment1.launch was launched will be shown the following result:
 
 ![Screenshot 2024-01-11 113428](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/108ce4fd-28cc-493e-8c79-536735b07718)
 
