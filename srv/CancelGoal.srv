@@ -1,0 +1,3 @@
+bool CancelGoal
+----
+bool GoalCanceled

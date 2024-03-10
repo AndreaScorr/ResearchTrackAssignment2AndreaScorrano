@@ -4,8 +4,38 @@
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 
+/**
+* \file lastTargetService.cpp
+* \brief Service for last Target setted
+* \author Andrea Scorrano
+* \version 1.0
+* \date 10/03/2024
+*
+*
+* Subscribes to: <BR>
+* ° /robot_behavior_state_machine/smach/container_status
+*
+* Publishes to: <BR>
+* ° /PlayWithRobot
+*
+* Services : <BR>
+* ° /lastTarget
+*
+* Description :
+*
+* This is a service node that, when called, returns the coordinates of the last target sent by the user.
+*
+*/
 
 
+
+/**
+* \brief get the desired positions by the topics and put them in the result argument of the service
+* \param req
+* \param res
+* \return true
+* get the desired positions by the topics and put them in the result argument of the service
+*/
 bool lastTarget(assignment_2_2023::LastTarget::Request &req, assignment_2_2023::LastTarget::Response &res)
 {
 	//actionlib::SimpleActionClient<assignment_2_2023::PlanningAction> ac("/reaching_goal", true);

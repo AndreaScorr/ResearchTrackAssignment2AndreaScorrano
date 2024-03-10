@@ -1,0 +1,173 @@
+\hypertarget{position_and_velocity_subscriber_8cpp}{}\doxysection{src/position\+And\+Velocity\+Subscriber.cpp File Reference}
+\label{position_and_velocity_subscriber_8cpp}\index{src/positionAndVelocitySubscriber.cpp@{src/positionAndVelocitySubscriber.cpp}}
+
+
+set the taget position of the robot  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+String.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$assignment\+\_\+2\+\_\+2023/\+Planning\+Action.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}assignment\+\_\+2\+\_\+2023/\+Parameters.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}assignment\+\_\+2\+\_\+2023/\+Last\+Target.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}assignment\+\_\+2\+\_\+2023/\+Average\+Speed\+And\+Distance.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$geometry\+\_\+msgs/\+Point.\+h$>$}\newline
+Include dependency graph for position\+And\+Velocity\+Subscriber.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{position_and_velocity_subscriber_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{position_and_velocity_subscriber_8cpp_af479aa585a3f2bb540cb375a725a25fd}{parameter\+Callback}} (const assignment\+\_\+2\+\_\+2023\+::\+Parameters\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em get the desired positions by /robot/parameters \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{position_and_velocity_subscriber_8cpp_ad80c437e3bd9db9e0c61b37a5ab50422}{Velocity\+And\+Distance}} (assignment\+\_\+2\+\_\+2023\+::\+Average\+Speed\+And\+Distance\+::\+Request \&req, assignment\+\_\+2\+\_\+2023\+::\+Average\+Speed\+And\+Distance\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em set the results with the distance between target and position and the speed\textquotesingle{}s average \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{position_and_velocity_subscriber_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em main function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{position_and_velocity_subscriber_8cpp_af5ae2612d52db25390b4bfe6fe6f9be3}{pos\+\_\+x}}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_a37117684ca5c6770331edca1ae1c66e8}\label{position_and_velocity_subscriber_8cpp_a37117684ca5c6770331edca1ae1c66e8}} 
+float {\bfseries pos\+\_\+y}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_a4b312b3530217eb51cbad6e930610f6b}\label{position_and_velocity_subscriber_8cpp_a4b312b3530217eb51cbad6e930610f6b}} 
+float {\bfseries vel\+\_\+x}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_a8da0d8b61b8a35f0da9af571cb2d72ac}\label{position_and_velocity_subscriber_8cpp_a8da0d8b61b8a35f0da9af571cb2d72ac}} 
+float {\bfseries vel\+\_\+z}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_ad9f28cfaa87cc60ea60fe38a48c76f8e}\label{position_and_velocity_subscriber_8cpp_ad9f28cfaa87cc60ea60fe38a48c76f8e}} 
+assignment\+\_\+2\+\_\+2023\+::\+Last\+Target {\bfseries last\+Target}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_ac279f3989e5aa8d03c7e9467b5af16e7}\label{position_and_velocity_subscriber_8cpp_ac279f3989e5aa8d03c7e9467b5af16e7}} 
+float {\bfseries last\+Position\+\_\+x}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_af7387c8f015ca13e9240b6a90bbd41c9}\label{position_and_velocity_subscriber_8cpp_af7387c8f015ca13e9240b6a90bbd41c9}} 
+float {\bfseries last\+Position\+\_\+y}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_ac9d295b6b68339ac488d95e3039193f2}\label{position_and_velocity_subscriber_8cpp_ac9d295b6b68339ac488d95e3039193f2}} 
+int {\bfseries window\+Size}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_a1e8053735646801717cba1159962881a}\label{position_and_velocity_subscriber_8cpp_a1e8053735646801717cba1159962881a}} 
+float {\bfseries sum\+Vel\+\_\+x} =0
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_a69fdf3a1781293d3833ceaff09660950}\label{position_and_velocity_subscriber_8cpp_a69fdf3a1781293d3833ceaff09660950}} 
+float {\bfseries sum\+Vel\+\_\+z} =0
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_acb559820d9ca11295b4500f179ef6392}\label{position_and_velocity_subscriber_8cpp_acb559820d9ca11295b4500f179ef6392}} 
+int {\bfseries i} =0
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_ab0247886959846a46303765332bd71be}\label{position_and_velocity_subscriber_8cpp_ab0247886959846a46303765332bd71be}} 
+float {\bfseries average\+\_\+vel\+\_\+x}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_a9f46494ee0e3c434c3ee6f6911439f93}\label{position_and_velocity_subscriber_8cpp_a9f46494ee0e3c434c3ee6f6911439f93}} 
+float {\bfseries average\+\_\+vel\+\_\+z}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_acd75014bc8bce539ac767065c64eb751}\label{position_and_velocity_subscriber_8cpp_acd75014bc8bce539ac767065c64eb751}} 
+float {\bfseries dist\+\_\+x}
+\item 
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_a05d6ab6c01771b7443f3938a2395882c}\label{position_and_velocity_subscriber_8cpp_a05d6ab6c01771b7443f3938a2395882c}} 
+float {\bfseries dist\+\_\+y}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+set the taget position of the robot 
+
+\begin{DoxyAuthor}{Author}
+Andrea Scorrano \textbackslash{}verion 1.\+0 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+10/03/2024
+\begin{DoxyItemize}
+\item Action Clients / Services 
+\end{DoxyItemize}
+\end{DoxyDate}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em world\+\_\+width} & Define the width of the discretized world.\\
+\hline
+\end{DoxyParams}
+Subscribes to\+: ~\newline
+ ° /robot/parameters
+
+Services\+: ~\newline
+ °/\+Velocity\+Distance
+
+Action client\+: ~\newline
+ °/last\+Target
+
+Description \+: ~\newline
+
+
+This service node subscribes to the robot\textquotesingle{}s position and velocity (using the custom message) and implements a server to retrieve the distance of the robot from the target and the robot\textquotesingle{}s average speed. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{position_and_velocity_subscriber_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{positionAndVelocitySubscriber.cpp@{positionAndVelocitySubscriber.cpp}!main@{main}}
+\index{main@{main}!positionAndVelocitySubscriber.cpp@{positionAndVelocitySubscriber.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+main function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & \\
+\hline
+{\em argv} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_af479aa585a3f2bb540cb375a725a25fd}\label{position_and_velocity_subscriber_8cpp_af479aa585a3f2bb540cb375a725a25fd}} 
+\index{positionAndVelocitySubscriber.cpp@{positionAndVelocitySubscriber.cpp}!parameterCallback@{parameterCallback}}
+\index{parameterCallback@{parameterCallback}!positionAndVelocitySubscriber.cpp@{positionAndVelocitySubscriber.cpp}}
+\doxysubsubsection{\texorpdfstring{parameterCallback()}{parameterCallback()}}
+{\footnotesize\ttfamily void parameter\+Callback (\begin{DoxyParamCaption}\item[{const assignment\+\_\+2\+\_\+2023\+::\+Parameters\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+get the desired positions by /robot/parameters 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & get the desired positions by /robot/parameters at put them in the variables pos\+\_\+x, pos\+\_\+y,vel\+\_\+x,vel\+\_\+z \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_ad80c437e3bd9db9e0c61b37a5ab50422}\label{position_and_velocity_subscriber_8cpp_ad80c437e3bd9db9e0c61b37a5ab50422}} 
+\index{positionAndVelocitySubscriber.cpp@{positionAndVelocitySubscriber.cpp}!VelocityAndDistance@{VelocityAndDistance}}
+\index{VelocityAndDistance@{VelocityAndDistance}!positionAndVelocitySubscriber.cpp@{positionAndVelocitySubscriber.cpp}}
+\doxysubsubsection{\texorpdfstring{VelocityAndDistance()}{VelocityAndDistance()}}
+{\footnotesize\ttfamily bool Velocity\+And\+Distance (\begin{DoxyParamCaption}\item[{assignment\+\_\+2\+\_\+2023\+::\+Average\+Speed\+And\+Distance\+::\+Request \&}]{req,  }\item[{assignment\+\_\+2\+\_\+2023\+::\+Average\+Speed\+And\+Distance\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+set the results with the distance between target and position and the speed\textquotesingle{}s average 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+{\em res} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true this function set the results with the distance between target and position and the speed\textquotesingle{}s average 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{position_and_velocity_subscriber_8cpp_af5ae2612d52db25390b4bfe6fe6f9be3}\label{position_and_velocity_subscriber_8cpp_af5ae2612d52db25390b4bfe6fe6f9be3}} 
+\index{positionAndVelocitySubscriber.cpp@{positionAndVelocitySubscriber.cpp}!pos\_x@{pos\_x}}
+\index{pos\_x@{pos\_x}!positionAndVelocitySubscriber.cpp@{positionAndVelocitySubscriber.cpp}}
+\doxysubsubsection{\texorpdfstring{pos\_x}{pos\_x}}
+{\footnotesize\ttfamily float pos\+\_\+x}
+
+This tutorial demonstrates simple receipt of messages over the R\+OS system. 

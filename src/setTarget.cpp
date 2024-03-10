@@ -18,6 +18,41 @@ float vel_z;
 std::string feedback; 
 bool g_shutdown_requested = false; //is setted true when ctrl-c is pressed
 
+/**
+* \file setTarget.cpp
+* \brief set the taget position of the robot
+* \author Andrea Scorrano
+* \verion 1.0
+* \date 10/03/2024
+- Action Clients / Services
+* \param [in] world_width Define the width of the discretized world.
+*
+*
+* Subscribes to: <BR>
+* ° /odom
+* ° /reaching_goal/feedback
+* 
+* Publishes to: <BR>
+* ° /robot/parameters
+*
+*
+* Action client: <BR>
+* °/reaching_goal
+
+* Description : <BR>
+*
+*This node that implements an action client, allow the user to set a target (x, y) or to cancel it. Has been used the feedback/status of the action server to know when the target has been reached. 
+*The node also publishes the robot position and velocity as a custom message (x,y, vel_x, vel_z), by relying on the values published on the topic /odom.
+
+*/
+
+
+/**
+* \brief get the position and the velocity from the topic /odom
+* \param msg
+*
+* This function get the position and the velocity from the topic /odom and put in the variables pos_x,pox_y,vel_x,vel_z
+*/
 void odomCallback(const nav_msgs::Odometry::ConstPtr &msg)
 {
 
@@ -39,6 +74,13 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr &msg)
 
 
 
+
+/**
+* \brief get the feedback from the topic /reaching_goal/feedback"
+* \param msg
+*
+* This function get the feedback from the topic /reaching_goal/feedback and put in the variable feedback
+*/
 void feedbackCallBack(const assignment_2_2023::PlanningActionFeedback::ConstPtr &msg)
 {
   // ROS_INFO("%s", msg->header.frame_id.c_str());
@@ -49,6 +91,13 @@ void feedbackCallBack(const assignment_2_2023::PlanningActionFeedback::ConstPtr 
   
 }
 
+/**
+* \brief shut down handler
+* \param sig	
+*
+* This function is called by this function: signal(SIGINT, shutdownHandler) it check when the command ctrl-c is pressed on the keyboard
+*/
+
 void shutdownHandler(int sig) 
 {
 
@@ -56,6 +105,15 @@ void shutdownHandler(int sig)
 	ROS_INFO("Shutting down...");
  	g_shutdown_requested = true;
  }
+
+
+/**
+* \brief main function
+* \param argc
+* \param argv
+*
+*
+*/
 
 
 int main (int argc, char **argv)

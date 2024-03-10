@@ -30,6 +30,40 @@ float dist_x;
 float dist_y;
 
 //callBack function for the subscribe that get the positions and the velocities 
+
+/**
+* \file positionAndVelocitySubscriber.cpp
+* \brief set the taget position of the robot
+* \author Andrea Scorrano
+* \verion 1.0
+* \date 10/03/2024
+- Action Clients / Services
+* \param [in] world_width Define the width of the discretized world.
+*
+*
+* Subscribes to: <BR>
+* ° /robot/parameters
+* 
+* Services: <BR>
+* °/VelocityDistance
+*
+* Action client: <BR>
+* °/lastTarget
+
+*
+* Description : <BR>
+*
+*This service node subscribes to the robot's position and velocity (using the custom message) and implements a server to
+*retrieve the distance of the robot from the target and the robot's average speed.
+*/
+
+
+/**
+* \brief get the desired positions by /robot/parameters
+* \param msg
+* 
+* get the desired positions by /robot/parameters at put them in the variables pos_x, pos_y,vel_x,vel_z
+*/
 void parameterCallback(const assignment_2_2023::Parameters::ConstPtr& msg)
 {
 	pos_x= msg->pos_x;
@@ -52,6 +86,13 @@ void parameterCallback(const assignment_2_2023::Parameters::ConstPtr& msg)
 
 
 //this function set the results with the distance between target and position and the speed's average
+/**
+* \brief set the results with the distance between target and position and the speed's average
+* \param req
+* \param res
+* \return true
+* this function set the results with the distance between target and position and the speed's average
+*/
 bool VelocityAndDistance(assignment_2_2023::AverageSpeedAndDistance::Request &req, 				assignment_2_2023::AverageSpeedAndDistance::Response &res)
 {
 	//actionlib::SimpleActionClient<assignment_2_2023::PlanningAction> ac("/reaching_goal", true);
@@ -69,7 +110,13 @@ bool VelocityAndDistance(assignment_2_2023::AverageSpeedAndDistance::Request &re
 	return true;
 }
 
-
+/**
+* \brief main function
+* \param argc
+* \param argv
+*
+*
+*/
 int main(int argc, char **argv)
 {
   

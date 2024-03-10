@@ -1,0 +1,223 @@
+Andrea Scorrano
+
+id\+: 6463777
+
+Create a new package, in which you will develop three nodes\+:
+\begin{DoxyItemize}
+\item (a) A node that implements an action client, allowing the user to set a target (x, y) or to cancel it. Try to use the feedback/status of the action server to know when the target has been reached. The node also publishesthe robot position and velocity as a custom message (x,y, vel\+\_\+x, vel\+\_\+z), by relying on the values published on the topic /odom;
+\item (b) A service node that, when called, returnsthe coordinates of the last target sent by the user;
+\item (c) Anotherservice node thatsubscribes to the robot’s position and velocity (using the custom message) and implements a server to retrieve the distance of the robot from the target and the robot’s average speed.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md0}{}\doxysection{How to Run the code}\label{md__r_e_a_d_m_e_autotoc_md0}
+In order to start the whole simulation, open three terminals. To run the simulation of the enviroment, it\textquotesingle{}s needed to write le following line\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# roslaunch assignment\_2\_2023 assignment1.launch}
+\end{DoxyCode}
+
+
+To run the three nodes using the launch file, it\textquotesingle{}s needed to write le following line, specifying the window size of the average, in this case 3\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# roslaunch assignment\_2\_2023 AndreaScorrano.launch des\_window:=3}
+\end{DoxyCode}
+
+
+To retrieve the distance of the robot from the target and the robot’s average speed, it\textquotesingle{}s needed to call the service with the following line\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# rosservice call /VelocityDistance }
+\end{DoxyCode}
+
+
+The last line must be runned every time it\textquotesingle{}s needed to know the distance of the robot from the target and the robot’s average speed.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{Pseudocode and Flow Charts}\label{md__r_e_a_d_m_e_autotoc_md1}
+In this assignment were implemented three nodes. The following flow charts show how each node works.\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{set\+Target Node}\label{md__r_e_a_d_m_e_autotoc_md2}
+This node that implements an action client, allow the user to set a target (x, y) or to cancel it. Has been used the feedback/status of the action server to know when the target has been reached. The node also publishes the robot position and velocity as a custom message (x,y, vel\+\_\+x, vel\+\_\+z), by relying on the values published on the topic /odom. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Initialize pos\_x, pos\_y, vel\_x, vel\_z as global variables}
+\DoxyCodeLine{Initialize feedback as a string}
+\DoxyCodeLine{Initialize g\_shutdown\_requested as a boolean (false)}
+\DoxyCodeLine{}
+\DoxyCodeLine{Function odomCallback(msg):}
+\DoxyCodeLine{    Print position and velocity information from /odom}
+\DoxyCodeLine{    Assign position and velocity values to global variables pos\_x, pos\_y, vel\_x, vel\_z}
+\DoxyCodeLine{}
+\DoxyCodeLine{Function feedbackCallBack(msg):}
+\DoxyCodeLine{    Assign the value of feedback to feedback}
+\DoxyCodeLine{}
+\DoxyCodeLine{Function shutdownHandler(sig):}
+\DoxyCodeLine{    Print "Shutting down..."}
+\DoxyCodeLine{    Set g\_shutdown\_requested to true}
+\DoxyCodeLine{}
+\DoxyCodeLine{Main:}
+\DoxyCodeLine{    Initialize ROS node ("Planning")}
+\DoxyCodeLine{    Create a SimpleActionClient for the action assignment\_2\_2023::PlanningAction}
+\DoxyCodeLine{    Wait for the action server to start}
+\DoxyCodeLine{    Initialize a goal of type assignment\_2\_2023::PlanningGoal}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Prompt the user to enter the x position of the goal}
+\DoxyCodeLine{    Prompt the user to enter the y position of the goal}
+\DoxyCodeLine{    Print a message indicating to press ctrl-\/c to cancel the goal}
+\DoxyCodeLine{    Wait for 3 seconds to display the message}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Send the goal to the action}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Create subscribers for the "odom" and "/reaching\_goal/feedback" topics and a publisher for "robot/parameters"}
+\DoxyCodeLine{    Set up a handler for handling shutdown using ctrl-\/c}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Loop while ROS is active and g\_shutdown\_requested is false:}
+\DoxyCodeLine{        Create a message of type assignment\_2\_2023::Parameters}
+\DoxyCodeLine{        Assign the current values of position and velocity to the variables of the message}
+\DoxyCodeLine{        Publish the message}
+\DoxyCodeLine{}
+\DoxyCodeLine{        Get the state of the action}
+\DoxyCodeLine{        If the feedback is "Target reached!", exit the loop}
+\DoxyCodeLine{}
+\DoxyCodeLine{        Run the ROS spin loop to handle callbacks}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Cancel the action goal when the loop ends or the target is reached}
+\DoxyCodeLine{}
+\DoxyCodeLine{End the program}
+\end{DoxyCode}
+
+
+\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{last\+Target\+Service node}\label{md__r_e_a_d_m_e_autotoc_md3}
+This is a service node that, when called, returns the coordinates of the last target sent by the user. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Function lastTarget(req, res):}
+\DoxyCodeLine{    \# Get the desired positions from topics and put them in the result argument of the service}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    res.target\_pose.pose.position.x = get("/des\_pos\_x")}
+\DoxyCodeLine{    res.target\_pose.pose.position.y = get("/des\_pos\_y")}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Print "return x:", res.target\_pose.pose.position.x, "y:", res.target\_pose.pose.position.y}
+\DoxyCodeLine{    Return true}
+\DoxyCodeLine{}
+\DoxyCodeLine{Main:}
+\DoxyCodeLine{    Initialize ROS node ("lastTarget\_")}
+\DoxyCodeLine{    Create a NodeHandle}
+\DoxyCodeLine{    Initialize a ServiceServer with the lastTarget function as the callback for the "/lastTarget" service}
+\DoxyCodeLine{    Enter the ROS spin loop}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \# The program will stay in the spin loop, waiting for service requests}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Return 0}
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{position\+And\+Velocity\+Subscriber node}\label{md__r_e_a_d_m_e_autotoc_md4}
+This service node subscribes to the robot’s position and velocity (using the custom message) and implements a server to retrieve the distance of the robot from the target and the robot’s average speed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Initialize pos\_x, pos\_y, vel\_x, vel\_z as global variables}
+\DoxyCodeLine{Initialize lastTarget as an instance of assignment\_2\_2023::LastTarget}
+\DoxyCodeLine{Initialize lastPosition\_x, lastPosition\_y as variables for the last target position}
+\DoxyCodeLine{Initialize windowSize, sumVel\_x, sumVel\_z, i, average\_vel\_x, average\_vel\_z as variables for averaging}
+\DoxyCodeLine{Initialize dist\_x, dist\_y as variables for the distance calculation}
+\DoxyCodeLine{}
+\DoxyCodeLine{Function parameterCallback(msg):}
+\DoxyCodeLine{    Assign values from the message to pos\_x, pos\_y, vel\_x, vel\_z}
+\DoxyCodeLine{    Calculate dist\_x and dist\_y based on the difference between pos\_x, pos\_y, and lastPosition\_x, lastPosition\_y}
+\DoxyCodeLine{}
+\DoxyCodeLine{Function VelocityAndDistance(req, res):}
+\DoxyCodeLine{    Set res.dist\_x, res.dist\_y to dist\_x, dist\_y}
+\DoxyCodeLine{    Set res.average\_x, res.average\_z to average\_vel\_x, average\_vel\_z}
+\DoxyCodeLine{    Print distance from target x, distance from target y, average velocity x, average velocity z}
+\DoxyCodeLine{    Return true}
+\DoxyCodeLine{}
+\DoxyCodeLine{Main:}
+\DoxyCodeLine{    Initialize ROS node ("listener")}
+\DoxyCodeLine{    Create a NodeHandle}
+\DoxyCodeLine{    Create a ServiceClient for "/lastTarget"}
+\DoxyCodeLine{    Create a ServiceServer for "/VelocityDistance" with VelocityAndDistance as the callback}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Wait for the service client to exist}
+\DoxyCodeLine{    Call the lastTarget service and store the results in lastPosition\_x, lastPosition\_y}
+\DoxyCodeLine{    Get the windowSize from the parameter server}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Create a subscriber for the "robot/parameters" topic with parameterCallback as the callback}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Loop while ROS is active:}
+\DoxyCodeLine{        Accumulate velocities in sumVel\_x, sumVel\_z}
+\DoxyCodeLine{        Increment i}
+\DoxyCodeLine{}
+\DoxyCodeLine{        If i equals windowSize:}
+\DoxyCodeLine{            Calculate average velocities and reset accumulators}
+\DoxyCodeLine{            Set i to 0}
+\DoxyCodeLine{}
+\DoxyCodeLine{        Run the ROS spin loop to handle callbacks}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Return 0}
+\end{DoxyCode}
+
+
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysection{Simulation of the assignment}\label{md__r_e_a_d_m_e_autotoc_md5}
+To setup the environment is needed to launch assignment1.\+launch
+
+
+
+\DoxyHorRuler{0}
+
+
+Once done, will be opened Gazebo and Rviz, with the environment.
+
+
+
+\DoxyHorRuler{0}
+
+
+To run the three nodes using the launch file, it\textquotesingle{}s needed to write le following line, specifying the window size of the average, in this case 3\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# roslaunch assignment\_2\_2023 AndreaScorrano.launch des\_window:=3}
+\end{DoxyCode}
+
+
+
+
+Once started the node, will be asked to the user the position x and y of the goal. Will be shown a message that specify to the user to press ctr-\/c to cancel the goal (has been used ros\+::\+Duration(3.\+0).sleep() to give the user the possibility to see the message)
+
+In case ctrl-\/c is pressed the goal is cancelled and on the terminal where assignment1.\+launch was launched will be shown the following result\+:
+
+
+
+\DoxyHorRuler{0}
+
+
+To retrieve the distance of the robot from the target and the robot’s average speed while the robot is reaching the goal, it\textquotesingle{}s needed to call the service with the following line\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# rosservice call /VelocityDistance }
+\end{DoxyCode}
+
+
+
+
+\DoxyHorRuler{0}
+
+
+Once the robot reached the goal position, in the therminal where assignment2.\+launch were launched it\textquotesingle{}s possible to see the message \char`\"{}\+Goal succeded!\char`\"{}\+:
+
+
+
+In the terminal where Andrea\+Scorrano.\+launch where launched it\textquotesingle{}s possible to see the following result\+:
+
+
+
+On Gazebo is possible to see that the robot reached the goal, in this case the desired position where x=5 and y=6\+:
+
+
+
+\DoxyHorRuler{0}
+ In order to have a view of what happens bebehind the scenes is needed to run the following command on the terminal\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# rosrun rqt\_graph rqt\_graph}
+\end{DoxyCode}
+
+
+It\textquotesingle{}s possible to see isualize the communication between the nodes.
+
+ 

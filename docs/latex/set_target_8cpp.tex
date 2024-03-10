@@ -1,0 +1,153 @@
+\hypertarget{set_target_8cpp}{}\doxysection{src/set\+Target.cpp File Reference}
+\label{set_target_8cpp}\index{src/setTarget.cpp@{src/setTarget.cpp}}
+
+
+set the taget position of the robot  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$assignment\+\_\+2\+\_\+2023/\+Planning\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$geometry\+\_\+msgs/\+Point.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}nav\+\_\+msgs/\+Odometry.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}assignment\+\_\+2\+\_\+2023/\+Parameters.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+Include dependency graph for set\+Target.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{set_target_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{set_target_8cpp_ae77e5d68ff0f4892f5154064e8b5e21c}{odom\+Callback}} (const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em get the position and the velocity from the topic /odom \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{set_target_8cpp_ac9de5e325c5d8ddde1517b7c250dab81}{feedback\+Call\+Back}} (const assignment\+\_\+2\+\_\+2023\+::\+Planning\+Action\+Feedback\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em get the feedback from the topic /reaching\+\_\+goal/feedback" \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{set_target_8cpp_acb23539d830db5daa574a721d483e0a5}{shutdown\+Handler}} (int sig)
+\begin{DoxyCompactList}\small\item\em shut down handler \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{set_target_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em main function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{set_target_8cpp_af5ae2612d52db25390b4bfe6fe6f9be3}\label{set_target_8cpp_af5ae2612d52db25390b4bfe6fe6f9be3}} 
+float {\bfseries pos\+\_\+x}
+\item 
+\mbox{\Hypertarget{set_target_8cpp_a37117684ca5c6770331edca1ae1c66e8}\label{set_target_8cpp_a37117684ca5c6770331edca1ae1c66e8}} 
+float {\bfseries pos\+\_\+y}
+\item 
+\mbox{\Hypertarget{set_target_8cpp_a4b312b3530217eb51cbad6e930610f6b}\label{set_target_8cpp_a4b312b3530217eb51cbad6e930610f6b}} 
+float {\bfseries vel\+\_\+x}
+\item 
+\mbox{\Hypertarget{set_target_8cpp_a8da0d8b61b8a35f0da9af571cb2d72ac}\label{set_target_8cpp_a8da0d8b61b8a35f0da9af571cb2d72ac}} 
+float {\bfseries vel\+\_\+z}
+\item 
+\mbox{\Hypertarget{set_target_8cpp_ab557e90b0a13661a7eaa72e772fb8975}\label{set_target_8cpp_ab557e90b0a13661a7eaa72e772fb8975}} 
+std\+::string {\bfseries feedback}
+\item 
+\mbox{\Hypertarget{set_target_8cpp_adcb7a838de79ac0277c9a52553b6d1d4}\label{set_target_8cpp_adcb7a838de79ac0277c9a52553b6d1d4}} 
+bool {\bfseries g\+\_\+shutdown\+\_\+requested} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+set the taget position of the robot 
+
+\begin{DoxyAuthor}{Author}
+Andrea Scorrano \textbackslash{}verion 1.\+0 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+10/03/2024
+\begin{DoxyItemize}
+\item Action Clients / Services 
+\end{DoxyItemize}
+\end{DoxyDate}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em world\+\_\+width} & Define the width of the discretized world.\\
+\hline
+\end{DoxyParams}
+Subscribes to\+: ~\newline
+ ° /odom ° /reaching\+\_\+goal/feedback
+
+Publishes to\+: ~\newline
+ ° /robot/parameters
+
+Action client\+: ~\newline
+ °/reaching\+\_\+goal
+
+Description \+: ~\newline
+
+
+This node that implements an action client, allow the user to set a target (x, y) or to cancel it. Has been used the feedback/status of the action server to know when the target has been reached. The node also publishes the robot position and velocity as a custom message (x,y, vel\+\_\+x, vel\+\_\+z), by relying on the values published on the topic /odom. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{set_target_8cpp_ac9de5e325c5d8ddde1517b7c250dab81}\label{set_target_8cpp_ac9de5e325c5d8ddde1517b7c250dab81}} 
+\index{setTarget.cpp@{setTarget.cpp}!feedbackCallBack@{feedbackCallBack}}
+\index{feedbackCallBack@{feedbackCallBack}!setTarget.cpp@{setTarget.cpp}}
+\doxysubsubsection{\texorpdfstring{feedbackCallBack()}{feedbackCallBack()}}
+{\footnotesize\ttfamily void feedback\+Call\+Back (\begin{DoxyParamCaption}\item[{const assignment\+\_\+2\+\_\+2023\+::\+Planning\+Action\+Feedback\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+get the feedback from the topic /reaching\+\_\+goal/feedback" 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & This function get the feedback from the topic /reaching\+\_\+goal/feedback and put in the variable feedback \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{set_target_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{set_target_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{setTarget.cpp@{setTarget.cpp}!main@{main}}
+\index{main@{main}!setTarget.cpp@{setTarget.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+main function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & \\
+\hline
+{\em argv} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{set_target_8cpp_ae77e5d68ff0f4892f5154064e8b5e21c}\label{set_target_8cpp_ae77e5d68ff0f4892f5154064e8b5e21c}} 
+\index{setTarget.cpp@{setTarget.cpp}!odomCallback@{odomCallback}}
+\index{odomCallback@{odomCallback}!setTarget.cpp@{setTarget.cpp}}
+\doxysubsubsection{\texorpdfstring{odomCallback()}{odomCallback()}}
+{\footnotesize\ttfamily void odom\+Callback (\begin{DoxyParamCaption}\item[{const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+get the position and the velocity from the topic /odom 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & This function get the position and the velocity from the topic /odom and put in the variables pos\+\_\+x,pox\+\_\+y,vel\+\_\+x,vel\+\_\+z \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{set_target_8cpp_acb23539d830db5daa574a721d483e0a5}\label{set_target_8cpp_acb23539d830db5daa574a721d483e0a5}} 
+\index{setTarget.cpp@{setTarget.cpp}!shutdownHandler@{shutdownHandler}}
+\index{shutdownHandler@{shutdownHandler}!setTarget.cpp@{setTarget.cpp}}
+\doxysubsubsection{\texorpdfstring{shutdownHandler()}{shutdownHandler()}}
+{\footnotesize\ttfamily void shutdown\+Handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+shut down handler 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sig} & ~\newline
+\\
+\hline
+\end{DoxyParams}
+This function is called by this function\+: signal(\+S\+I\+G\+I\+N\+T, shutdown\+Handler) it check when the command ctrl-\/c is pressed on the keyboard 

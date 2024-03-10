@@ -1,0 +1,75 @@
+\hypertarget{last_target_service_8cpp}{}\doxysection{src/last\+Target\+Service.cpp File Reference}
+\label{last_target_service_8cpp}\index{src/lastTargetService.cpp@{src/lastTargetService.cpp}}
+
+
+Service for last Target setted.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}assignment\+\_\+2\+\_\+2023/\+Last\+Target.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}assignment\+\_\+2\+\_\+2023/\+Planning\+Action.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+Include dependency graph for last\+Target\+Service.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{last_target_service_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{last_target_service_8cpp_aaf2bafe8c052ddabc3e4bde5194ebb42}{last\+Target}} (assignment\+\_\+2\+\_\+2023\+::\+Last\+Target\+::\+Request \&req, assignment\+\_\+2\+\_\+2023\+::\+Last\+Target\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em get the desired positions by the topics and put them in the result argument of the service \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{last_target_service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{last_target_service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Service for last Target setted. 
+
+\begin{DoxyAuthor}{Author}
+Andrea Scorrano 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10/03/2024
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ ° /robot\+\_\+behavior\+\_\+state\+\_\+machine/smach/container\+\_\+status
+
+Publishes to\+: ~\newline
+ ° /\+Play\+With\+Robot
+
+/\+Services \+: ~\newline
+ ° /last\+Target
+
+Description \+:
+
+This is a service node that, when called, returns the coordinates of the last target sent by the user. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{last_target_service_8cpp_aaf2bafe8c052ddabc3e4bde5194ebb42}\label{last_target_service_8cpp_aaf2bafe8c052ddabc3e4bde5194ebb42}} 
+\index{lastTargetService.cpp@{lastTargetService.cpp}!lastTarget@{lastTarget}}
+\index{lastTarget@{lastTarget}!lastTargetService.cpp@{lastTargetService.cpp}}
+\doxysubsubsection{\texorpdfstring{lastTarget()}{lastTarget()}}
+{\footnotesize\ttfamily bool last\+Target (\begin{DoxyParamCaption}\item[{assignment\+\_\+2\+\_\+2023\+::\+Last\+Target\+::\+Request \&}]{req,  }\item[{assignment\+\_\+2\+\_\+2023\+::\+Last\+Target\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+get the desired positions by the topics and put them in the result argument of the service 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+{\em res} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true get the desired positions by the topics and put them in the result argument of the service 
+\end{DoxyReturn}
