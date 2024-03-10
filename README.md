@@ -217,9 +217,17 @@ In order to have a view of what happens bebehind the scenes is needed to run the
 ```
 # rosrun rqt_graph rqt_graph
 ```
-It's possible to see isualize the communication between the nodes.
+It's possible to visualize the communication between the nodes.
 
 ![rosgraph](https://github.com/AndreaScorr/ResearchTrackAssignment2AndreaScorrano/assets/40230364/d51586b3-86fe-4835-a208-0c880dea26fa)
 
+### Start whole simulation at once ###
+
+If it's desidered to run the whole simulation without open two terminals is sufficient to run the following line:
+
+```
+# roslaunch assignment_2_2023 AndreaScorranoFasterLaunch.launch des_window:=3
+```
+It will be opened Gazebo, Rviz, and all nodes developed. However it's suggested to use two different temnials in order to have a bettwe view of what's appening. 
 
 
